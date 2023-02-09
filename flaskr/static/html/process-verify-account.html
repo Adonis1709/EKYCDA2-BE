@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="static/css/process-verify-account.css">
+
+<div class="container" ng-controller="process-verify-account-controller">
+    <div class="title" ng-click="handlebackHome($event)">&lt;&lt;Home</div>
+    <ul class="stepper linear">
+        <li class="step" ng-class="{'actived-step': step == 1}">
+            <div class="step-title">Step 1 (Take a photo of the front ID card)</div>
+            <div class="step-content" ng-class="{'display-block': step == 1}">
+                <div class="content">
+                    <div class="title">Take a photo of your ID/ID card in front of you.</div>
+                    <div class="sub-title">* Please use real documents. Make sure the photo is not blurred or glossy,
+                        the information displayed is clear and easy
+                        to read.</div>
+                    <img class="image " src="{{imageFront}}" alt="Image cmnd">
+                </div>
+                <div style="color: red;" ng-class="{'hide': !errorCheck}">Please take a clear picture of the cccd and
+                    the front side.</div>
+                <div class=" step-actions" style="padding-top: 0;">
+                    <div ng-class=" {'hide': !waitingApi}" class="spinner-border text-secondary" role="status">
+                    </div>
+                    <input oninput="angular.element(this).scope().handleFrontInput(this)" ng-model="image" type="file"
+                        accept="image/*" class="btn btn-upload btn-next" ng-class="{'disabled': waitingApi}" />
+                    <!-- <button ng-click="goFrontForward($event)" class="btn btn-primary"
+                        ng-class="{'disabled': !cannext}">Tiếp tục</button> -->
+                </div>
+            </div>
+        </li>
+        <li class="step" ng-class="{'actived-step': step == 2}">
+            <div class="step-title">Step 2 (ID on the back side)</div>
+            <div class="step-content" ng-class="{'display-block': step == 2}">
+                <div class="content">
+                    <div class="title">Take a photo of your ID/ID card on the back side.</div>
+                    <div class="sub-title">* Please use real documents. Make sure the photo is not blurred or glossy,
+                        the information displayed is clear and easy
+                        to read.</div>
+                    <img class="image" src="{{imageBack}}" alt="Image cmnd">
+                </div>
+                <div style="color: red;" ng-class=" {'hide': !errorCheck}">Please take a clear picture of the cccd and
+                    the back side.</div>
+                <div class="step-actions" style="padding-top: 0;">
+                    <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary" role="status">
+                    </div>
+                    <input oninput="angular.element(this).scope().handleBackInput(this)" ng-model="image" type="file"
+                        accept="image/*" class="btn btn-upload btn-next" ng-class="{'disabled': waitingApi}" />
+                    <button class="btn btn-primary" ng-click="handleClickBack($event)">Back</button>
+                    <!-- <button class="btn btn-primary" ng-click="goBackForward($event)"
+                        ng-class="{'disabled': !cannext}">Tiếp tục</button> -->
+                </div>
+            </div>
+        </li>
+        <li class="step" ng-class="{'actived-step': step == 3}">
+            <div class="step-title waves-effect waves-dark">Step 2 ( Completed )</div>
+            <div class="step-content step-3" ng-class="{'display-block': step == 3}">
+                <div class="content">
+                    <div class="title">Complete your ID/ID card capture.</div>
+                    <div class="sub-title">* Please use real documents. Make sure the photo is not blurred or glossy,
+                        the information displayed is clear and easy
+                        to read.</div>
+                    <div class="content-finish">
+                        Click continute to proceed with the verification.
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-primary" ng-click="handleClickBack($event)">Back</button>
+                    <button class="btn btn-primary" ng-click="handleFinish($event)">Continute</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

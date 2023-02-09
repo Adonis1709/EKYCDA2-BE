@@ -1,0 +1,12 @@
+.row-table:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.row-table-checkbox:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+.form-group {
+    margin-bottom: 0;
+}

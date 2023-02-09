@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="static/css/faceid.css">
+<div ng-controller="faceid-controller">
+    <div class="container">
+        <div class="title">FaceID</div>
+        <div class="sub-title">
+            <p>
+                Position your face in the camera frame. Then move your head in a circle to show all angles of
+                your face please.
+            </p>
+        </div>
+        <div class="image-face">
+            <img src="static/images/face-icon.png" />
+        </div>
+        <button class="btn btn-primary btn-start" ng-click="handleStartCheckFaceId($event)" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">START</button>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">FACE ID CHECK</h5>
+                    <button type="button" class="btn-close btn-close-click" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <video style="width: 100%;" class="video-faceid" ng-class="{'hide': !cameraValid}"></video>
+                    <div class="message-cammera hide" ng-class="{'hide':cameraValid}">The app doesn't have access to the
+                        camera or your device
+                        doesn't support it
+                    </div>
+                    <img src="{{srcImage}}" width="100%" />
+                    <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary" role="status">
+                    </div>
+                    <input tyle="width: 100%" class="no-video-faceid" ng-class="{'hide':cameraValid}" type="file"
+                        accept="image/*" oninput="angular.element(this).scope().handleFaceInput(this)" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-close-click"
+                        data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

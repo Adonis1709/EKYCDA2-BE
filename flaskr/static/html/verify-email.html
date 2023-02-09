@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="static/css/verify-email.css">
+<div class="container" ng-controller="verify-email-controller">
+    <div class="row ">
+        <div class="col-md-6 d-sm-none d-md-block d-none d-sm-block">
+            <img class="image-login" src="static/images/E-register.png" alt="Login image" />
+        </div>
+        <div class="col-sm-12 col-md-6 verify-email-content">
+            <div class="title">E-BLACK</div>
+            <div class="title-2">Email verification</div>
+            <div class="email-notify">
+                <img src="static/images/waring.png" />
+                <div>You need to verify your email address to activate your account.</div>
+            </div>
+            <div class="info-1">An email with instructions to verify your email address has been sent to you.</div>
+            <div class="info-2 pb-5">Haven't received a verification code in your email?
+                <div style="display: inline-block; text-decoration: underline; color:#0d6efd; cursor: pointer;;"
+                    ng-click="handleClickReSend($event)" ng-class="{'disabled': waitingApi}">
+                    Click here</div> to re-send the email.
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+.container {
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+.image-login {
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    padding: 20px;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.avatar-container {
+    text-align: center;
+    position: relative;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(100%);
+    cursor: pointer;
+}
+
+.avatar {
+    padding: 20px;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: 700;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    text-align: center;
+}
+
+.sub-title {
+    font-size: 22px;
+    text-align: center;
+    padding-top: 50px;
+    color: black;
+}
+
+.action {
+    display: flex;
+    font-size: 22px;
+    padding: 12px 0;
+}
+
+.action .lable-action {
+    padding-right: 18px;
+}
+
+.form-login {
+    padding-top: 16px;
+    padding-bottom: 20px;
+    margin: 0 30px;
+}
+
+.form-login .form-login-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-login .form-login-group .form-login-input {
+    width: 100%;
+    font-size: 16px;
+}
+
+.form-login .form-login-group .form-login-lable {
+    padding-right: 20px;
+    font-size: 18px;
+    padding-bottom: 6px;
+}
+
+.form-login .form-buttom-sumit {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.form-login .form-group-message {
+    width: 100%;
+    flex: 1;
+    color: #dc3545;
+    margin: 8px 0 !important;
+}
+
+.btn {
+    border-radius: 0;
+    font-size: 20px;
+    padding: 12px 80px;
+}
+
+.wrapper-form-register {
+    margin: 0 50px;
+}
+
+.input-full-width {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: 40px;
+        line-height: 40px;
+        padding: 0 6px;
+        padding-top: 40px;
+    }
+
+    .title-2 {
+        padding: 4px 6px;
+        font-size: 40px;
+    }
+
+    .sub-title {
+        padding-top: 20px;
+    }
+
+    .form-login {
+        margin: 0 0px;
+    }
+
+    .form-login .form-login-group .form-buttom-sumit {
+        margin-top: 40px;
+    }
+
+    .action {
+        font-size: 18px;
+        padding: 6px 0;
+    }
+
+    .action .lable-action {
+        padding-right: 10px;
+    }
+
+    .wrapper-form-register {
+        margin: 0 20px !important;
+    }
+}

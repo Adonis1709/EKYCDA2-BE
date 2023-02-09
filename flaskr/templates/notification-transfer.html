@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKYCDA2</title>
+</head>
+
+<body>
+    <div>
+        <h1>Notification transfer</h1>
+        <div>Your account: {{username}}-{{fullname}}({% if phone == '' or transfer.phone is none %}
+            'not set phone'
+            {% else %}
+            {{phone}}
+            {% endif %})
+        </div>
+        <div>Amount balance before transfer: {{amountBalanceBf}} VND </div>
+        <div>Amount balance after transfer: {{amountBalanceAf }} VND </div>
+        <div>Transfer free: {{transferFee}}% </div>
+        <ul>
+            <li>Id of transfer: {{id}}</li>
+            <li>Transfer: {{transfer.fullname}}({% if transfer.phone == '' or transfer.phone is none %}
+                'not set phone'
+                {% else %}
+                {{transfer.phone}}
+                {% endif %})
+            </li>
+            <li>Receiver: {{receiver.fullname}}({% if receiver.phone == '' or receiver.phone is none %}
+                'not set phone'
+                {% else %}
+                {{receiver.phone}}
+                {% endif %})
+            </li>
+            <li>Money: {{money}} VND</li>
+            {% if typeOf == 1 %}
+            <li>Type of: transfer</li>
+            {% elif typeOf == 2 %}
+            <li>Type of: top up</li>
+            {% elif typeOf == 3 %}
+            <li>Typeof: Withdraw</li>
+            {% else %}
+            {% endif %}
+            <li>Note: {{note}}</li>
+            <li>Transfer date: {{createdDate}}</li>
+            <li>Confirm date: {{updatedDate}}</li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<link rel="stylesheet" href="static/css/profile.css">
+<navigate></navigate>
+<div class="container" ng-controller="profile-controller">
+    <div style="position: fixed; right: 20px; top:64px; z-index: 10000;">
+        <div class="toast toast-refresh-success align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Refresh user successfully
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        <div style="padding: 4px 4px;"></div>
+        <div class="toast toast-update-success align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Update user successfully
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <h3 class="pl-2">Profile page</h3>
+    <div class="row mb-4 mt-4">
+        <div class=" col col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="avatar-container">
+                <img class="avatar" src="{{user.avatarSrc}}" />
+                <input class="imputImage" type="file" style="height: 1px; width: 1px;" accept="image/*"
+                    onchange="angular.element(this).scope().handleAvatarInput(this)" />
+                <img ng-click="handleClictEditAvatar($event)" class="edit-icon" src="static/images/edit-icon.png" />
+            </div>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Identity *</label>
+                <input md-no-asterisk disabled ng-model="user.idIdentityCard">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Fullname *</label>
+                <input md-no-asterisk disabled ng-model="user.fullname">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Date of Birth *</label>
+                <input md-no-asterisk disabled ng-model="user.dateOfBirth">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Sex *</label>
+                <input md-no-asterisk disabled ng-model="user.sex">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Place of origin *</label>
+                <input md-no-asterisk disabled ng-model="user.placeOfOrigin">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Place of residence *</label>
+                <input md-no-asterisk disabled ng-model="user.placeOfResidence">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Date of expiry *</label>
+                <input md-no-asterisk disabled ng-model="user.dateOfExpiry">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Amount balance *</label>
+                <input md-no-asterisk disabled value="{{user.amountBalance || 0 | currency: '': 0}} VND">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label style="color: red;">Username *</label>
+                <input disabled md-no-asterisk ng-model="user.username">
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label>Email *</label>
+                <input ng-change="handleOnChangeUser('email')" required md-no-asterisk ng-model="user.email">
+                <div class="messages">
+                    <div ng-class="{'display-block': emailError.empty }" class="message">
+                        Email money is require.</div>
+                    <div ng-class="{'display-block': emailError.incorrect}" class="message">Email incorrect.</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <md-input-container style="width: 100%;" class="form-group-message">
+                <label>Phone</label>
+                <input md-no-asterisk ng-model="user.phone">
+            </md-input-container>
+        </div>
+        <div class="col-12"
+            style="padding-top: 10px; text-align: right; display: flex; justify-content: end; margin-bottom: 10px;">
+            <div ng-class="{'hide': !waitingApi}" style="display: inline-block;" class="spinner-border text-secondary"
+                role="status"></div>
+            <button ng-class="{'disabled': waitingApi}" style="padding: 4px 18px;" type="button"
+                ng-click="handleRefreshUser()" class="btn btn-primary mr-2">Refresh</button>
+            <button ng-class="{'disabled': waitingApi}" style="padding: 4px 18px;" type="button"
+                ng-click="handleUpdateUser()" class="btn btn-primary">Update</button>
+        </div>
+    </div>
+</div>
+</div>

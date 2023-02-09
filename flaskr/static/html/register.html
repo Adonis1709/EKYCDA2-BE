@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="static/css/register.css">
+<div class="container" ng-controller="register-controller">
+    <div class="row">
+        <div class="col-md-6 d-sm-none d-md-block d-none d-sm-block">
+            <img class="image-login" src="static/images/E-register.png" alt="Login image" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+            <div class="wrapper-form-register">
+                <div class="title">E-BLACK</div>
+                <div class="title-2">REGISTER</div>
+                <div class="sub-title">Pleasure add your infomation</div>
+                <div class="form-login">
+                    <div class="input-group mb-3 form-login-group">
+                        <label class="form-input form-login-lable" for="firstname">First name: </label>
+                        <div class="form-group-message" style="position: relative;">
+                            <input placeholder="Please enter firstname" style="width: 100%; border-radius: 0;"
+                                name="firstname" ng-model="firstname" class="form-control form-login-input "
+                                ng-class="{'is-invalid': firstname === ''}" id="firstname" type="text">
+                            <div class="messages" style="position: absolute; bottom: -18px;">
+                                <div ng-class="{'display-block': firstname === '' }" class="message">
+                                    Please specify first name.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <label for="lastname" class="form-input form-login-lable">Last name: </label>
+                        <div class="form-group-message" style="position: relative;">
+                            <input placeholder="Please enter lastname " style=" width: 100%; border-radius: 0;"
+                                ng-model="lastname" class="form-control form-login-input" id="lastname" name="lastname"
+                                type="text" ng-class="{'is-invalid' :username === ''}">
+                            <div class="messages" style="position: absolute; bottom: -18px;">
+                                <div ng-class="{'display-block': lastname === '' }" class="message">
+                                    Please specify last name.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <label class="form-input form-login-lable" for="email">Email: </label>
+                        <div class="form-group-message" style="position: relative;">
+                            <input placeholder="Please enter email" style="width: 100%; border-radius: 0;" name="email"
+                                ng-model="email" class="form-control form-login-input "
+                                ng-class="{'is-invalid': email === ''}" id="email" type="email"
+                                ng-change="handleChangeEmail()">
+                            <div class="messages" style="position: absolute; bottom: -18px;">
+                                <div ng-class="{'display-block': email === '' }" class="message">
+                                    Please specify email.</div>
+                                <div ng-class="{'display-block': email !== '' && emailRuleFail }" class="message">
+                                    Not an email
+                                </div>
+                                <div ng-class="{'display-block':email !== '' && !emailRuleFail && emailExit}"
+                                    class="message">
+                                    Email already exists.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <label class="form-input form-login-lable" for="username">Username: </label>
+                        <div class="form-group-message" style="position: relative;">
+                            <input placeholder="Please enter username" ng-change="handleUsernameChange($event)"
+                                style="width: 100%; border-radius: 0;" name="username" ng-model="username"
+                                class="form-control form-login-input " ng-class="{'is-invalid': username === ''}"
+                                id="username" type="text">
+                            <div class="messages" style="position: absolute; bottom: -18px;">
+                                <div ng-class="{'display-block': username === '' }" class="message">
+                                    Please specify username.
+                                </div>
+                                <div ng-class="{'display-block':username !== '' && usernameExit }" class="message">
+                                    Username already exists.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <label for="password" class="form-input form-login-lable">Password: </label>
+                        <div class="form-group-message" style="position: relative;">
+                            <input placeholder="Please enter password " style=" width: 100%; border-radius: 0;"
+                                name="password" ng-model="password" class="form-control form-login-input" id="password"
+                                type="password" ng-class="{'is-invalid' :username === ''}"
+                                ng-change="handleChangePassword($event)">
+                            <div class="messages" style="position: absolute; bottom: -18px;">
+                                <div ng-class="{'display-block': password === '' }" class="message">
+                                    Please specify password.
+                                </div>
+                                <div ng-class="{'display-block': password !== '' && passwordRuleFail }" class="message"
+                                    style="padding-left: 6px;">
+                                    The password does not follow the rules below.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 form-login-group" style="margin-bottom: 16px !important;">
+                        <label for="confirmpassword" class="form-input form-login-lable">Confirm password:
+                        </label>
+                        <div class="form-group-message" style="position: relative;">
+                            <input placeholder="Please enter confirmpassword " style=" width: 100%; border-radius: 0;"
+                                name="confirmpassword" ng-model="confirmpassword" class="form-control form-login-input"
+                                id="confirmpassword" type="password" ng-class="{'is-invalid' : password === ''}">
+                            <div class="messages" style="position: absolute; bottom: -18px;">
+                                <div ng-class="{'display-block': password === '' }" class="message">
+                                    Please specify password confirmation.
+                                </div>
+                                <div ng-class="{'display-block': confirmpassword !== password && !!confirmpassword}"
+                                    class="message">
+                                    Password confirmation doesn't match.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>Password require:</div>
+                        <ul>
+                            <li>Minimum 8 characters</li>
+                            <li>Have at least 1 upper case character</li>
+                            <li>Have at least 1 lower case character</li>
+                            <li>Have at least 1 number 0-9</li>
+                            <li>Have at least 1 special character</li>
+                        </ul>
+                    </div>
+                    <div class="action">
+                        <a href="#!login"> &lt;&lt;Back to login </a>
+                    </div>
+                    <div class="input-group form-buttom">
+                        <button ng-class="{'disabled': waitingApi}" ng-click="onSubmit($event)"
+                            class="btn btn-primary">Sign up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

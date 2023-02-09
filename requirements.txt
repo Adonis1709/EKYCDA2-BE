@@ -1,0 +1,8 @@
+dependency-injector
+flask
+Flask-Mail
+PyJWT
+minio
+requests
+SQLAlchemy-serializer 
+Flask-SQLAlchemy

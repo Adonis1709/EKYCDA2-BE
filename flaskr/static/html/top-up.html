@@ -1,0 +1,185 @@
+<link rel="stylesheet" href="static/css/top-up.css">
+<navigate></navigate>
+<div class="container" ng-controller="topup-controller">
+    <div style="position: fixed; right: 20px; top:64px">
+        <div class="toast toast-out-money align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Pleasure!!! This card is out of money.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        <div style="padding: 4px 4px;"></div>
+        <div class="toast toast-times-out align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Pleasure!!! This card can only be loaded up to 1 million/time.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <h3 class="pl-2 mb-4">Top up page</h3>
+    <ul class="stepper linear">
+        <li class="step" ng-class="{'actived-step': step == 1}">
+            <div class="step-title">Card info</div>
+            <div class="step-content" ng-class="{'display-block': step == 1}">
+                <div>Enter your card info to top up. </div>
+                <div class="content">
+                    <div class="row mb-4 mt-4">
+                        <div class="col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Card number</label>
+                                <input ng-change="handleStep1Change('number')" required md-no-asterisk
+                                    placeholder="Ex: 111111" ng-model="card.number">
+                                <div class="messages">
+                                    <div ng-class="{'display-block': cardError.number.empty }" class="message">
+                                        Card number is require.</div>
+                                    <div ng-class="{'display-block': cardError.number.incorrect}" class="message">Card
+                                        number incorrect.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Date expired</label>
+                                <input ng-change="handleStep1Change('expired')" required md-no-asterisk
+                                    placeholder="Ex: 10/10/2022" ng-model="card.expired">
+                                <div class="messages">
+                                    <div ng-class="{'display-block': cardError.expired.empty }" class="message">
+                                        Date expired is require.</div>
+                                    <div ng-class="{'display-block': cardError.expired.incorrect}" class="message">Date
+                                        expired incorrect.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>CVV code</label>
+                                <input ng-change="handleStep1Change('cvv')" required md-no-asterisk
+                                    placeholder="Ex: 411" ng-model="card.cvv">
+                                <div class="messages">
+                                    <div ng-class="{'display-block': cardError.cvv.empty }" class="message">
+                                        CVV code is require.</div>
+                                    <div ng-class="{'display-block': cardError.cvv.incorrect}" class="message">CVV code
+                                        incorrect.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+
+                        <div class="col-12" style="padding-top: 10px; text-align: right;">
+                            <div style="margin-left: 4px;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleNext($event)">Continute</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="step" ng-class="{'actived-step': step == 2}">
+            <div class="step-title">Money</div>
+            <div class="step-content" ng-class="{'display-block': step == 2}">
+                <div>Enter money want to to up. </div>
+                <div>Top up was completed. This is info of top up. </div>
+                <div>Amount balance: {{amountBalance || 0 | currency: '': 0}} VND </div>
+                <div>Amount balance after transfer: {{amountBalanceAf || 0 | currency: '': 0}} VND </div>
+                <div class="content">
+                    <div class="row mb-4 mt-4">
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Amount money</label>
+                                <input ng-change="handleStep2Change('amountMoney')" required md-no-asterisk
+                                    placeholder="Ex: 100,000 VND" ng-model="amountMoney">
+                                <div class="messages">
+                                    <div ng-class="{'display-block': amountMoneyError.empty }" class="message">
+                                        Amount money is require.</div>
+                                    <div ng-class="{'display-block': amountMoneyError.incorrect}" class="message">Amount
+                                        money incorrect.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Note</label>
+                                <input md-no-asterisk placeholder="Ex: ABC transfer" ng-model="note ">
+                            </md-input-container>
+                        </div>
+                        <div class="col-12" style="padding-top: 10px; text-align: right;">
+                            <div style="margin-left: 4px;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleNext($event)">Continute</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="step" ng-class="{'actived-step': step == 3}">
+            <div class="step-title">Info stransfer</div>
+            <div class="step-content" ng-class="{'display-block': step == 3}">
+                <div>Top up was completed. This is info of top up. </div>
+                <div>Amount balance: {{amountBalance || 0 | currency: '': 0}} VND </div>
+
+                <div class="content">
+                    <div class="row mb-4 mt-4">
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Money</label>
+                                <input disabled md-no-asterisk
+                                    value="{{transferInfo.money || 0 | currency: '': 0}} VND">
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Note</label>
+                                <input disabled md-no-asterisk ng-model="transferInfo.note">
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Status</label>
+                                <div class="w-100" ng-if="transferInfo.status === 0">
+                                    <input disabled md-no-asterisk value="Confirm">
+                                </div>
+                                <div class="w-100" ng-if="transferInfo.status === 1">
+                                    <input disabled md-no-asterisk value="Completed">
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Withdraw at date</label>
+                                <input disabled md-no-asterisk value="{{transferInfo.createdDate}}">
+                            </md-input-container>
+                        </div>
+                        <div class=" col-12"
+                            style="padding-top: 10px; text-align: right; display: flex; justify-content: end;">
+                            <div style="margin-left: 4px;  display: flex; align-items: center;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleContinute($event)">Continute</button>
+                            </div>
+                            <div style="margin-left: 4px; display: flex; align-items: center;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleBackHome($event)">Home</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,675 @@
+.container {
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.title {
+  padding-top: 16px;
+  font-size: 24px;
+  line-height: 24px;
+  color: #0d6efd;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sub-title {
+  color: #f00;
+  padding-bottom: 20px;
+}
+
+.image {
+  width: 400px;
+  height: 100%;
+}
+
+.content-finish {
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 500;
+  padding: 20px 0;
+}
+
+.btn-group .btn {
+  margin-left: 4px;
+}
+
+.display-block {
+  display: block !important;
+}
+
+@media screen and (max-width: 768px) {
+  .image {
+    width: 250px;
+    height: 100%;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-upload {
+    display: inline-block;
+  }
+
+  .btn {
+    margin-top: 4px;
+  }
+}
+
+
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #E0E0E0;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: auto !important;
+}
+
+main,
+.content {
+  flex: 1 0 auto;
+}
+
+/*Handle the CHROME yellow background for autofill*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none !important;
+  -webkit-text-fill-color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+svg:not(:root),
+svg {
+  display: block;
+  overflow: auto;
+}
+
+
+/* Icons */
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/*Helpers*/
+.no-pad {
+  padding: 0 !important;
+}
+
+/*Scroll bars*/
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-button {
+  width: 3px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.54);
+  border: 3px none rgba(0, 0, 0, 0.54);
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.64);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.54);
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+  border: 2px none #fff;
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-track:hover {
+  background: #fff;
+}
+
+::-webkit-scrollbar-track:active {
+  background: #fff;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+nav,
+.navbar-fixed {
+  color: #3f51b5 !important;
+  background-color: #F5F5F5 !important;
+  background: transparent;
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084) !important;
+  z-index: 999 !important;
+}
+
+nav a.button-collapse>i {
+  font-size: 32px;
+}
+
+.side-nav a {
+  margin: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.side-nav a:hover {
+  background-color: rgba(0, 0, 0, 0.23) !important;
+}
+
+.side-nav .top-bg {
+  background-image: url(https://pathli.com/app/assets/build/images/todo_icon.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 140px;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1.2rem;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.side-nav.sub-side-nav {
+  z-index: 999 !important;
+  top: 62px !important;
+  background-color: #F5F5F5 !important;
+}
+
+.side-nav.sub-side-nav>li:nth-child(2) {
+  margin-top: .5rem !important;
+}
+
+.side-nav .divider {
+  margin: 0 !important;
+}
+
+.side-nav .subheader {
+  cursor: initial;
+  pointer-events: none;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 1rem !Important;
+  font-weight: 500;
+  line-height: 32px !important;
+  padding: 0.5rem 1rem !important;
+  height: 32px !important;
+  margin-bottom: .5rem !important;
+}
+
+.drag-target {
+  z-index: 997 !important;
+}
+
+.dark-1 {
+  background-color: #000000;
+}
+
+.dark-2 {
+  background-color: #212121;
+}
+
+.dark-3 {
+  background-color: #303030;
+}
+
+.dark-4 {
+  background-color: #424242;
+}
+
+.light-1 {
+  background-color: #E0E0E0;
+}
+
+.light-2 {
+  background-color: #F5F5F5;
+}
+
+.light-3 {
+  background-color: #FAFAFA;
+}
+
+.light-4 {
+  background-color: #FFFFFF;
+}
+
+.primary-500 {
+  background-color: #cddc39;
+}
+
+.primary-50 {
+  background-color: #f9fbe7;
+}
+
+.primary-100 {
+  background-color: #f0f4c3;
+}
+
+.primary-700 {
+  background-color: #afb42b;
+}
+
+.accent-50 {
+  background-color: #e0f7fa;
+}
+
+.accent-A100 {
+  background-color: #84ffff;
+}
+
+.accent-A200 {
+  background-color: #18ffff;
+}
+
+.accent-A400 {
+  background-color: #00e5ff;
+}
+
+.warn-500 {
+  background-color: #ff5722;
+}
+
+.warn-100 {
+  background-color: #ffccbc;
+}
+
+.warn-700 {
+  background-color: #e64a19;
+}
+
+.dropdown-content {
+  overflow: visible !important;
+  background-color: #e5e5e5 !important;
+  margin-top: -4px !important;
+}
+
+.dropdown-content.sub-menu {
+  margin-top: -0.3rem;
+}
+
+.button-collapse {
+  width: 64px;
+  text-align: -webkit-center;
+}
+
+a.button-collapse:hover {
+  background: rgba(0, 0, 0, 0.13);
+  border-radius: 50%;
+}
+
+
+/* Stepper */
+label.invalid {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: red !important;
+  top: 50px !important;
+}
+
+label.invalid.active {
+  -webkit-transform: translateY(0%) !important;
+  transform: translateY(0%) !important;
+}
+
+/*Validate.js FIX*/
+
+ul.stepper {
+  counter-reset: section;
+  /*max-width: 800px;*/
+}
+
+ul.stepper.horizontal {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: 458px;
+}
+
+.card-content ul.stepper.horizontal {
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+.card-content ul.stepper.horizontal:first-child {
+  margin-top: -20px;
+}
+
+ul.stepper.horizontal::before {
+  content: '';
+  background-color: transparent;
+  width: 100%;
+  min-height: 84px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  position: absolute;
+  left: 0;
+}
+
+ul.stepper .wait-feedback {
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+ul.stepper:not(.horizontal) .step {
+  position: relative;
+}
+
+ul.stepper .step.feedbacking .step-content>*:not(.wait-feedback) {
+  opacity: 0.1;
+}
+
+ul.stepper.horizontal .step {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 84px;
+}
+
+ul.stepper.horizontal .step:last-child {
+  width: auto;
+}
+
+ul.stepper.horizontal .step:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+ul.stepper:not(.horizontal) .step:not(:last-child) {
+  margin-bottom: 10px;
+  -webkit-transition: margin-bottom 0.4s;
+  transition: margin-bottom 0.4s;
+}
+
+ul.stepper:not(.horizontal) .step:not(:last-child).active {
+  margin-bottom: 36px;
+}
+
+ul.stepper:not(.horizontal) .step::before {
+  position: absolute;
+  top: 12px;
+  counter-increment: section;
+  content: counter(section);
+  height: 28px;
+  width: 28px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+ul.stepper:not(.horizontal) .step.active::before,
+ul.stepper:not(.horizontal) .step.done::before,
+ul.stepper.horizontal .step.active .step-title::before,
+ul.stepper.horizontal .step.done .step-title::before {
+  background-color: #2196f3;
+}
+
+ul.stepper:not(.horizontal) .step.done::before,
+ul.stepper.horizontal .step.done .step-title::before {
+  content: '\e5ca';
+  font-size: 16px;
+  font-family: 'Material Icons';
+}
+
+ul.stepper:not(.horizontal) .step.wrong::before,
+ul.stepper.horizontal .step.wrong .step-title::before {
+  content: '\e001';
+  font-size: 24px;
+  font-family: 'Material Icons';
+  background-color: red !important;
+}
+
+ul.stepper:not(.horizontal) .step-title {
+  margin: 0 -20px;
+  cursor: pointer;
+  padding: 15.5px 44px 24px 60px;
+  display: block;
+}
+
+ul.stepper.horizontal .step-title {
+  line-height: 84px;
+  height: 84px;
+  padding-left: 65px;
+  padding-right: 25px;
+  display: inline-block;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+ul.stepper.horizontal .step .step-title::before {
+  position: absolute;
+  top: 28.5px;
+  left: 19px;
+  counter-increment: section;
+  content: counter(section);
+  height: 28px;
+  width: 28px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+.card-content ul.stepper.horizontal .step .step-title:first-child {
+  margin-left: -20px;
+  padding-left: 85px;
+}
+
+.card-content ul.stepper.horizontal .step .step-title:first-child::before {
+  left: 39px;
+}
+
+.card-content ul.stepper.horizontal .step .step-title:last-child {
+  margin-right: -20px;
+  padding-right: 45px;
+}
+
+.card-content ul.stepper.horizontal .step .step-title:last-child::before {
+  left: 39px;
+}
+
+ul.stepper .step-title::after {
+  content: attr(data-step-label);
+  display: block;
+  position: absolute;
+  font-size: 0.8rem;
+  color: #424242;
+  font-weight: 400;
+}
+
+ul.stepper.horizontal .step-title::after {
+  top: 15px;
+}
+
+ul.stepper .step-title:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+ul.stepper .step.active .step-title {
+  font-weight: 500;
+}
+
+ul.stepper .step-content {
+  position: relative;
+  display: none;
+  height: calc(100% - 132px);
+  width: inherit;
+  overflow: visible;
+  margin-left: 41px;
+  margin-right: 24px;
+}
+
+ul.stepper.horizontal .step-content {
+  position: absolute;
+  height: calc(100% - 84px);
+  top: 84px;
+  left: 0;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 20px 20px 76px 20px;
+}
+
+.card-content ul.stepper.horizontal .step-content {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+ul.stepper:not(.horizontal)>.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 13.5px;
+  width: 1px;
+  height: calc(100% - 38px);
+  background-color: rgba(0, 0, 0, 0.1);
+  -webkit-transition: height 0.4s;
+  transition: height 0.4s;
+}
+
+ul.stepper:not(.horizontal)>.step.active:not(:last-child)::after {
+  height: calc(100% - 12px);
+}
+
+ul.stepper .step-actions {
+  padding-top: 16px;
+  -webkit-display: flex;
+  -moz-display: flex;
+  -ms-display: flex;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+ul.stepper:not(.horizontal) .step-actions .btn:not(:last-child),
+ul.stepper:not(.horizontal) .step-actions .btn-flat:not(:last-child),
+ul.stepper:not(.horizontal) .step-actions .btn-large:not(:last-child) {
+  margin-right: 5px;
+}
+
+ul.stepper.horizontal .step-actions .btn:not(:last-child),
+ul.stepper.horizontal .step-actions .btn-flat:not(:last-child),
+ul.stepper.horizontal .step-actions .btn-large:not(:last-child) {
+  margin-left: 5px;
+}
+
+ul.stepper.horizontal .step-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.card-content ul.stepper.horizontal .step-actions {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+ul.stepper .step-content .row {
+  margin-bottom: 7px;
+}
+
+.actived-step::before {
+  background-color: #007bff !important
+}

@@ -1,0 +1,132 @@
+.container {
+	background: #fff;
+	padding-bottom: 40px;
+	min-height: 100vh;
+}
+
+.image-login {
+	width: 100%;
+	height: 100%;
+}
+
+.title {
+	padding: 20px;
+	font-size: 50px;
+	font-weight: 700;
+	text-align: center;
+	padding-top: 130px;
+}
+
+.sub-title {
+	font-size: 22px;
+	line-height: 22px;
+	text-align: center;
+	padding-top: 50px;
+	color: black;
+}
+
+.action {
+	display: flex;
+	font-size: 22px;
+	padding: 12px 0;
+}
+
+.action .lable-action {
+	padding-right: 18px;
+}
+
+.form-login {
+	padding-top: 30px;
+	padding-bottom: 20px;
+	margin: 0 30px;
+}
+
+.form-login .form-login-group {
+	display: flex;
+	align-items: center;
+}
+
+.form-login .form-login-group .form-login-input {
+	width: 140px;
+	font-size: 16px;
+	padding-right: 28px;
+}
+
+.form-login .form-login-group .form-login-lable {
+	padding-right: 20px;
+	padding-bottom: 12px;
+	font-size: 18px;
+}
+
+.form-login .form-buttom-sumit {
+	display: block;
+	text-align: center;
+	margin-top: 60px;
+}
+
+.form-login .form-group-message {
+	flex: 1;
+	color: #dc3545;
+}
+
+.form-group-message p {
+	position: relative;
+}
+
+.btn {
+	border-radius: 0;
+	font-size: 18px;
+	padding: 8px 14px;
+}
+
+.clear-button {
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	color: grey;
+	transform: translateY(calc(-50% + 1px));
+	cursor: pointer;
+	display: none;
+}
+
+.form-group-message p:hover .clear-button,
+.form-group-message .form-login-input:focus~.clear-button {
+	display: inline;
+}
+
+.form-group-message .form-login-input:placeholder-shown~.clear-button {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	.title {
+		font-size: 50px;
+		padding-top: 90px;
+	}
+
+	.sub-title {
+		padding-top: 30px;
+	}
+
+	.form-login .form-login-group .form-buttom-sumit {
+		margin-top: 40px;
+	}
+
+	.form-login .form-login-group .form-login-lable {
+		padding-right: 16px;
+		padding-right: 10px;
+	}
+
+	.action {
+		font-size: 18px;
+		padding: 6px 0;
+	}
+
+	.action .lable-action {
+		padding-right: 10px;
+	}
+
+	.mb-pd {
+		padding-top: 30px;
+	}
+}

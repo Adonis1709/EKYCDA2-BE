@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="static/css/confirm-info.css">
+<div class="container" ng-controller="confirm-info-controller">
+    <div class="row">
+        <div class="col-12 ">
+            <div class="wrapper-form-register">
+                <div class="title">Fill your profile</div>
+                <div class="avatar-container">
+                    <img class="avatar" ng-if="user.avatarSrc == 'avatar-default.png'"
+                        src="static/images/{{user.avatarSrc}}" />
+                    <img class="avatar" ng-if="user.avatarSrc !== 'avatar-default.png'" src="{{user.avatarSrc}}" />
+                    <input class="imputImage" type="file" style="height: 1px; width: 1px;" accept="image/*"
+                        onchange="angular.element(this).scope().handleAvatarInput(this)" />
+                    <img ng-click="handleClictEditAvatar($event)" class="edit-icon" src="static/images/edit-icon.png" />
+                </div>
+                <form class="form-login">
+                    <div class="input-group  form-login-group">
+                        <md-input-container class="form-group-message">
+                            <label>Identity</label>
+                            <input required md-no-asterisk placeholder="Ex: 084200011307"
+                                ng-model="user.idIdentityCard">
+                            <div ng-messages="!!user.idIdentityCard">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div class="input-group form-login-group">
+                        <md-input-container class="form-group-message">
+                            <label>Fullname</label>
+                            <input required md-no-asterisk placeholder="Ex: Nguyễn Minh Tiến" ng-model="user.fullname">
+                            <div ng-messages="!!user.fullname">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div class="input-group form-login-group">
+                        <md-input-container class="form-group-message">
+                            <label>Date of Birth</label>
+                            <input required md-no-asterisk placeholder="Ex: 14/10/2000" ng-model="user.dateOfBirth">
+                            <div ng-messages="!!user.dateOfBirth">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <md-input-container class="form-group-message">
+                            <label>Sex</label>
+                            <input required md-no-asterisk placeholder="Ex: Nam" ng-model="user.sex">
+                            <div ng-messages="!!user.sex">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <md-input-container class="form-group-message">
+                            <label>Place of origin</label>
+                            <input required md-no-asterisk placeholder="Ex: Long Toàn, Thị xã Duyên Hải, Trà Vinh"
+                                ng-model="user.placeOfOrigin">
+                            <div ng-messages="!!user.placeOfOrigin">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <md-input-container class="form-group-message">
+                            <label>Place of residence</label>
+                            <input required md-no-asterisk
+                                placeholder="Ex: Khóm Bến Chuối, Phường 1, Thị xã Duyên Hải, Trà Vinh"
+                                ng-model="user.placeOfResidence">
+                            <div ng-messages="!!user.placeOfResidence">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div class="input-group mb-3 form-login-group">
+                        <md-input-container class="form-group-message">
+                            <label>Date of expiry</label>
+                            <input required md-no-asterisk placeholder="Ex: 14/10/2025" ng-model="user.dateOfExpiry">
+                            <div ng-messages="!!user.dateOfExpiry">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div class="input-group form-buttom-sumit">
+                        <button ng-class="{'disabled': waitingApi}" ng-click="onSubmit($event)" type="submit"
+                            class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

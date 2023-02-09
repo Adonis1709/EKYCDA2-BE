@@ -1,0 +1,193 @@
+<link rel="stylesheet" href="static/css/transfer-history.css">
+<navigate></navigate>
+<div class="container" ng-controller="transfer-history-controller">
+    <div style="position: fixed; right: 20px; top:64px; z-index: 10000;">
+        <div class="toast toast-view align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Pleasure!!! Choose only one row data.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        <div style="padding: 4px 4px;"></div>
+        <div class="toast toast-continute align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Transfer was completed. Cannot continute.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <h3 class="pl-2">Transfer history page</h3>
+    <div class="row mb-4">
+        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="pl-2">Date transfer</div>
+            <div class="input-group" style=" display: flex; align-items: center;">
+                <input style="flex: 1;" type="date" ng-model="searchModel.createdDates[0]" class="form-control"
+                    value="">
+                <div style="padding: 0 4px;" class="input-group-addon">to</div>
+                <input style="flex: 1;" type="date" ng-model="searchModel.createdDates[1]" class="form-control"
+                    value="">
+            </div>
+        </div>
+    </div>
+    <div class="mb-2">
+        <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-outline-primary"
+            ng-click="search($event)">Search</button>
+        <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-outline-primary"
+            ng-click="view($event)" data-toggle="modal">View</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="row-table-checkbox">
+                    <div ng-if="checkAll == true">
+                        <input ng-model="checkAll" checked style="width: 100%; height:18px; cursor: pointer;"
+                            onchange="angular.element(this).scope().selectAllOnchange(this)" type="checkbox" />
+                    </div>
+                    <div ng-if="checkAll == false">
+                        <input ng-model="checkAll" style="width: 100%;  height:18px; cursor: pointer;"
+                            onchange="angular.element(this).scope().selectAllOnchange(this)" type="checkbox" />
+                    </div>
+                </th>
+                <th scope="col">Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="value in datas" class="row-table">
+                <th scope="col" class="row-table-checkbox">
+                    <div ng-if="selectedModel.includes(value.id)">
+                        <input checked style="width: 100%;  height:18px; cursor: pointer;"
+                            onchange="angular.element(this).scope().selectItemOnchange(this)" value="{{value.id}}"
+                            type="checkbox" />
+                    </div>
+                    <div ng-if="!selectedModel.includes(value.id)">
+                        <input style="width: 100%;  height:18px; cursor: pointer;"
+                            onchange="angular.element(this).scope().selectItemOnchange(this)" value="{{value.id}}"
+                            type="checkbox" />
+                    </div>
+                </th>
+                <td>
+                    <div class="require-message danger" ng-if="value.typeOf === 1">
+                        Transfer
+                    </div>
+                    <div class="require-message danger" ng-if="value.typeOf === 2">
+                        Top up
+                    </div>
+                    <div class="require-message danger" ng-if="value.typeOf === 3">
+                        Withdraw
+                    </div>
+                </td>
+                <td>{{value.money || 0 | currency: '': 0}} VND</td>
+                <td>
+                    <div class="require-message danger" ng-if="value.status === 0">
+                        Confirm
+                    </div>
+                    <div class="require-message danger" ng-if="value.status === 1">
+                        Completed
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example" style="display: flex; justify-content: end; ">
+        <ul class="pagination">
+            <li class="page-item">
+                <a ng-class="{'disabled' : !searchOption.hasPrev}" ng-click="handlePreviewPage()" class="page-link"
+                    href="" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li ng-repeat="page in pagesView" class="page-item">
+                <a ng-class="{'actived' : page == searchOption.page}" ng-click="handleChangePage(page)"
+                    class="page-link" href="">{{page}}</a>
+            </li>
+            <li class="page-item">
+                <a ng-class="{'disabled' : !searchOption.hasNext}" ng-click="handleNextPage()" class="page-link" href=""
+                    aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Transfer detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Amount</label>
+                        <input disabled class="form-control" id="exampleInputPassword1"
+                            value="{{data.money || 0 | currency: '': 0}} VND">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label for="exampleInputPassword2" style="width: 100%;">Type</label>
+                            <div class="w-100" ng-if="data.typeOf === 1">
+                                <input disabled class="form-control" id="exampleInputPassword1" value="Transfer">
+                            </div>
+                            <div class="w-100" ng-if="data.typeOf === 2">
+                                <input disabled class="form-control" id="exampleInputPassword1" value="Top up">
+                            </div>
+                            <div class="w-100" ng-if="data.typeOf === 3">
+                                <input disabled class="form-control" id="exampleInputPassword1" value="Withdraw">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Receiver</label>
+                        <input disabled class="form-control" id="exampleInputPassword1"
+                            value="{{data.receiver.fullname}}({{data.receiver.phone || 'not set phone'}})" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Transfer</label>
+                        <input disabled class="form-control" id="exampleInputPassword1"
+                            value="{{data.transfer.fullname}}({{data.transfer.phone || 'not set phone'}})" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Status</label>
+                        <div class="w-100" ng-if="data.status === 0">
+                            <input disabled class="form-control" id="exampleInputPassword1" value="Confirm" />
+                        </div>
+                        <div class="w-100" ng-if="data.status === 1">
+                            <input disabled class="form-control" id="exampleInputPassword1" value="Completed" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Note</label>
+                        <textarea disabled class="form-control" id="exampleInputPassword1">{{data.note}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Transfer date</label>
+                        <input disabled class="form-control" id="exampleInputPassword1" value="{{data.createdDate}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm date</label>
+                        <input disabled class="form-control" id="exampleInputPassword1" value="{{data.updatedDate}}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

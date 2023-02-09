@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="static/css/verify-account.css">
+<div class="container" ng-controller="verify-account-controller">
+    <div class="row ">
+        <div class="col-12 verify-email-content">
+            <div class="title">E-BLACK</div>
+            <div class="title-2">Verification Method</div>
+            <ul class="group-method">
+                <li class="method-item" ng-click="handleVerifyByCMND($event)">
+                    <img class="method-image" src="static/images/cmnd.png" />
+                    <div class="method-lable">CMND/CCCD</div>
+                </li>
+                <li class="method-item" ng-click="handleVerifyByPassport($event)">
+                    <img class="method-image" src="static/images/passport.png" />
+                    <div class="method-lable">Passport</div>
+                </li>
+                <li class="method-item" ng-click="handleVerifyByDriverLisence($event)">
+                    <img class=" method-image" src="static/images/driver-license.png" />
+                    <div class="method-lable">Driver Lisence</div>
+                </li>
+
+                <div class="method-item btn-group">
+                    <button ng-click="handleBack($event)" class="btn"> Back</button>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

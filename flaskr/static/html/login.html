@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="static/css/login.css">
+<div class="container" ng-controller="login-controller">
+    <div class="row">
+        <div class="col-md-6 d-sm-none d-md-block d-none d-sm-block">
+            <img class="image-login" src="static/images/E_BLACK_1.png" alt="Login image" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+            <div class="title">E-BLACK</div>
+            <div class="sub-title">Welcome back! Please sign in to yout account</div>
+            <form class="form-login">
+                <div class="input-group mb-3 form-login-group">
+                    <label class="form-input form-login-lable" for="username">Username: </label>
+                    <div class="form-group-message" style="position: relative;">
+                        <p>
+                            <input placeholder="Please enter username" style="width: 100%; border-radius: 0;"
+                                ng-model="username" class="form-control form-login-input " name="username"
+                                ng-class="{'is-invalid': username === ''}" id="username" type="text"
+                                ng-change="handleChangeIput($event)">
+                            <i ng-click="handleClearInput('username')"
+                                class="fa-regular fa-circle-xmark clear-button"></i>
+                        </p>
+                        <div class="messages" style="position: absolute; bottom: 0;">
+                            <div ng-class="{'display-block': username === '' }" class="message">
+                                Userame is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3 form-login-group">
+                    <label for="password" class="form-input form-login-lable">Password: </label>
+                    <div class="form-group-message">
+                        <p>
+                            <input placeholder="Please enter password "
+                                style="margin-left: 6px; width: 100%; border-radius: 0;" ng-model="password"
+                                class="form-control form-login-input" id="password" type="password" name="password"
+                                ng-class="{'is-invalid' :username === ''}" ng-change="handleChangeIput($event)">
+                            <i ng-click="handleClearInput('password')"
+                                class="fa-regular fa-circle-xmark clear-button"></i>
+                        </p>
+                        <div class="messages" style="margin-left: 6px; position: absolute; bottom: 0;">
+                            <div ng-class="{'display-block': password === '' }" class="message">
+                                Pasword is required.</div>
+                            <div ng-class="{'display-block': password === '' }"
+                                ng-if="loginFail && password !== '' && username !==''" class="message"
+                                style="padding-left: 6px;">
+                                Invalid username or password.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group form-buttom-sumit">
+                    <button ng-class="{'disabled': waitingApi}" type="submit" class="btn btn-primary"
+                        ng-click="onSubmit($event)">Sign in</button>
+                </div>
+            </form>
+            <div class="action  mb-pd">
+                <div class="lable-action">Need an account?</div>
+                <a href="#!register" routerLinkActive="active" ariaCurrentWhenActive="page">Sign up</a>
+            </div>
+            <div class="action ">
+                <div class="lable-action">Forgot password?</div>
+                <a class="link-action" href="#!reset-password" routerLinkActive="active"
+                    ariaCurrentWhenActive="page">Reset
+                    password</a>
+            </div>
+        </div>
+    </div>
+</div>

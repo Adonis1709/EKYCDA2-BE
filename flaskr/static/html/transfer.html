@@ -1,0 +1,214 @@
+<link rel="stylesheet" href="static/css/transfer.css">
+<navigate></navigate>
+<div class="container" ng-controller="transfer-controller">
+    <div style="position: fixed; right: 20px; top:64px">
+        <div class="toast toast-out-money align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Your account has insufficient funds.
+                </div>
+                <button ng-class="{'disabled': waitingApi}" type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <div style="padding: 4px 4px;"></div>
+        <div class="toast toast-times-out align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Only 2 withdrawal transactions are allowed per day.
+                </div>
+                <div style="margin-left: 4px;">
+                    <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary" role="status"></div>
+                    <button ng-class="{'disabled': waitingApi}" type="button"
+                        class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 class="pl-2  mb-4">Transfer page</h3>
+    <ul class="stepper linear">
+        <li class="step" ng-class="{'actived-step': step == 1}">
+            <div class="step-title">Card info</div>
+            <div class="step-content" ng-class="{'display-block': step == 1}">
+                <div>Enter phone or fullname to find user. </div>
+                <div class="content">
+                    <div class="row mb-4 mt-4">
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-autocomplete class="select-user" ng-disabled="isDisabled" md-no-cache="noCache"
+                                md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)"
+                                md-search-text="searchText" md-selected-item-change="selectedItemChange(item)"
+                                md-items="item in querySearch(searchText)" md-item-text="item.display" md-min-length="0"
+                                placeholder="Ex. Alaska or 0987767651" input-aria-labelledby="favoriteStateLabel">
+                                <md-item-template>
+                                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    <div style="color: red; font-size: 14px; ">
+                                        Enter phone or fullname to find user
+                                    </div>
+                                </md-not-found>
+                            </md-autocomplete>
+                            <div style="padding-left: 4px;" class="messages">
+                                <div ng-class="{'display-block': receiverIdError.empty }" class="message">
+                                    Receiver is require.</div>
+                                <div ng-class="{'display-block': receiverIdError.incorrect}" class="message">Please
+                                    select an existing receiver.</div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="padding-top: 10px; text-align: right;">
+                            <div style="margin-left: 4px;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" ng-click="handleNext($event)" type="button"
+                                    class="btn btn-primary">Continute</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="step" ng-class="{'actived-step': step == 2}">
+            <div class="step-title">Money</div>
+            <div class="step-content" ng-class="{'display-block': step == 2}">
+                <div>Enter money want to transfer. Free transfer 5%. </div>
+                <div>Amount balance: {{amountBalance || 0 | currency: '': 0}} VND </div>
+                <div>Amount balance after transfer: {{amountBalanceAf || 0 | currency: '': 0}} VND </div>
+                <div class="content">
+                    <div class="row mb-4 mt-4">
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Amount money</label>
+                                <input ng-change="handleStep2Change('amountMoney')" required md-no-asterisk
+                                    placeholder="Ex: 100,000 VND" ng-model="amountMoney">
+                                <div class="messages">
+                                    <div ng-class="{'display-block': amountMoneyError.empty }" class="message">
+                                        Amount money is require.</div>
+                                    <div ng-class="{'display-block': amountMoneyError.incorrect}" class="message">Amount
+                                        money incorrect.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Note</label>
+                                <input md-no-asterisk placeholder="Ex: ABC transfer" ng-model="note ">
+                            </md-input-container>
+                        </div>
+                        <div class="col-12" style="padding-top: 10px; text-align: right;">
+                            <div style="margin-left: 4px;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleNext($event)">Continute</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="step" ng-class="{'actived-step': step == 3}">
+            <div class="step-title">Confirm transfer by otp</div>
+            <div class="step-content" ng-class="{'display-block': step == 3}">
+                <div>Enter opt code in email adress to top up. </div>
+                <div class="content">
+                    <div class="row mb-4 mt-4">
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Otp email code</label>
+                                <input ng-change="handleStep3Change()" required md-no-asterisk placeholder="Ex: 122312"
+                                    ng-model="otp">
+                                <div class="messages">
+                                    <div ng-class="{'display-block': otpError.empty }" class="message">
+                                        Otp code is require.</div>
+                                    <div ng-class="{'display-block': otpError.incorrect}" class="message">Otp
+                                        code incorrect.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class="col-12" style="padding-top: 10px; text-align: right;">
+                            <div style="margin-left: 4px;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleNext($event)">Complete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="step" ng-class="{'actived-step': step == 4}">
+            <div class="step-title">Info stransfer</div>
+            <div class="step-content" ng-class="{'display-block': step == 4}">
+                <div>Transfer was completed. This is info of transfer. </div>
+                <div>Amount balance: {{amountBalance || 0 | currency: '': 0}} VND </div>
+                <div class="content">
+                    <div class="row mb-4 mt-4">
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Money</label>
+                                <input disabled md-no-asterisk
+                                    value="{{transferInfo.money || 0 | currency: '': 0}} VND">
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Receiver</label>
+                                <input disabled md-no-asterisk
+                                    value="{{transferInfo.transfer.fullname}}({{data.transfer.phone || 'not set phone'}})">
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Note</label>
+                                <input disabled md-no-asterisk ng-model="transferInfo.note">
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Status</label>
+                                <div class="w-100" ng-if="transferInfo.status === 0">
+                                    <input disabled md-no-asterisk value="Confirm">
+                                </div>
+                                <div class="w-100" ng-if="transferInfo.status === 1">
+                                    <input disabled md-no-asterisk value="Completed">
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Transfer at date</label>
+                                <input disabled md-no-asterisk value="{{transferInfo.createdDate}}">
+                            </md-input-container>
+                        </div>
+                        <div class=" col col-12 col-sm-12 col-md-6 col-lg-6">
+                            <md-input-container style="width: 100%; margin-bottom: 0;" class="form-group-message">
+                                <label>Confirm at date</label>
+                                <input disabled md-no-asterisk value="{{transferInfo.updatedDate}}">
+                            </md-input-container>
+                        </div>
+                        <div class=" col-12"
+                            style="padding-top: 10px; text-align: right; display: flex; justify-content: end;">
+                            <div style="margin-left: 4px;  display: flex; align-items: center;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleContinute($event)">Continute</button>
+                            </div>
+                            <div style="margin-left: 4px; display: flex; align-items: center;">
+                                <div ng-class="{'hide': !waitingApi}" class="spinner-border text-secondary"
+                                    role="status"></div>
+                                <button ng-class="{'disabled': waitingApi}" type="button" class="btn btn-primary"
+                                    ng-click="handleBackHome($event)">Home</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </ul>
+</div>
