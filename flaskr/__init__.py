@@ -18,7 +18,7 @@ def create_app(test_config=None):
         BUCKET_NAME = "dacntt2-ekyc",
         TRANSFER_FEES = 0.05, #5%
         TIME_EMAIL_EXPIRED = 5, #minute
-        IP_ADDRESS = "http://localhost:4201/",
+        IP_ADDRESS = "mingtien.ddns.net",
         SQLALCHEMY_DATABASE_URI='sqlite:///{}'.format(os.path.join(app.instance_path, "flaskr.db")),
         # SQLALCHEMY_TRACK_MODIFICATIONS = False,
     )
